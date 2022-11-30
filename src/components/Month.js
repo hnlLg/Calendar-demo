@@ -80,7 +80,6 @@ const Month = () => {
   }, [selectedDate, remoteEvents, getRemoteEvents]);
 
   useEffect(() => {
-    // Remove `remoteEvents` in future release
     if ((remoteEvents || getRemoteEvents) instanceof Function) {
       fetchEvents();
     }
