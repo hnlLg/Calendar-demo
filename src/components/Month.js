@@ -11,7 +11,6 @@ import {
   startOfMonth,
 } from "date-fns";
 // import MonthEvents from "../components/events/MonthEvents";
-import { getResourcedEvents } from "../helpers/generals";
 // import { WithResources } from "../components/common/WithResources";
 import Cell from "../components/common/Cell";
 import { TableGrid } from "../styles/styles";
@@ -30,9 +29,7 @@ const Month = () => {
     getRemoteEvents,
     triggerLoading,
     handleState,
-    resources,
     resourceFields,
-    fields,
     locale,
     hourFormat,
   } = useCalendarState();
@@ -46,7 +43,6 @@ const Month = () => {
     },
     { weekStartsOn: weekStartOn }
   );
-  console.log('eachWeekStart',eachWeekStart)
   const hFormat = hourFormat === "12" ? "hh:mm a" : "HH:mm";
   const daysList = weekDays.map((d) => addDays(eachWeekStart[0], d));
   const CELL_HEIGHT = height / eachWeekStart.length;
@@ -89,9 +85,6 @@ const Month = () => {
 
   const renderCells = (resource) => {
     let recousedEvents = events;
-    if (resource) {
-      recousedEvents = getResourcedEvents(events, resource, resourceFields, fields);
-    }
     const rows = [];
 
     
