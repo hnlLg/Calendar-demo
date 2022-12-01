@@ -87,13 +87,12 @@ const Month = () => {
     let recousedEvents = events;
     const rows = [];
 
-    
     for (const startDay of eachWeekStart) {
       const cells = weekDays.map((d) => {
         const today = addDays(startDay, d);
         const start = new Date(`${format(setHours(today, startHour), `yyyy/MM/dd ${hFormat}`)}`);
         const end = new Date(`${format(setHours(today, endHour), `yyyy/MM/dd ${hFormat}`)}`);
-        const field = resourceFields.idField;
+        // const field = resourceFields.idField;
         return (
           <span style={{ height: CELL_HEIGHT }} key={d.toString()} className="rs__cell">
             <Cell
@@ -101,8 +100,8 @@ const Month = () => {
               end={end}
               day={selectedDate}
               height={CELL_HEIGHT}
-              resourceKey={field}
-              resourceVal={resource ? resource[field] : null}
+            //   resourceKey={field}
+            //   resourceVal={resource ? resource[field] : null}
               cellRenderer={cellRenderer}
             />
             <Fragment>
