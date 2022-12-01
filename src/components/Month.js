@@ -133,7 +133,7 @@ const Month = () => {
                 today={today}
                 eachWeekStart={eachWeekStart}
                 daysList={daysList}
-                onViewMore={handleGotoDay}
+                onViewMore={() => console.log('view more')}
                 cellHeight={CELL_HEIGHT}
               />
             </Fragment>

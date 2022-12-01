@@ -14,25 +14,12 @@ import useCalendarState from "../../hooks/useCalendarState";
 
 const EventItem = ({ event, multiday, hasPrev, hasNext, showdate }) => {
   const {
-    triggerDialog,
-    onDelete,
-    events,
-    handleState,
-    triggerLoading,
-    viewerExtraComponent,
-    fields,
     direction,
-    resources,
-    resourceFields,
     locale,
-    viewerTitleComponent,
-    editable,
-    deletable,
     hourFormat,
     eventRenderer,
     view,
     draggable,
-    translations,
   } = useCalendarState()
   const [anchorEl, setAnchorEl] = useState(null);
   const [deleteConfirm, setDeleteConfirm] = useState(false);
