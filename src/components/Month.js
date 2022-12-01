@@ -16,8 +16,8 @@ import { getResourcedEvents } from "../helpers/generals";
 import Cell from "../components/common/Cell";
 import { TableGrid } from "../styles/styles";
 import useCalendarState from "../hooks/useCalendarState";
+import MonthEvents from "./events/MonthEvents";
 
-const WeekDays = 0 | 1 | 2 | 3 | 4 | 5 | 6;
 
 const Month = () => {
   const {
@@ -46,6 +46,7 @@ const Month = () => {
     },
     { weekStartsOn: weekStartOn }
   );
+  console.log('eachWeekStart',eachWeekStart)
   const hFormat = hourFormat === "12" ? "hh:mm a" : "HH:mm";
   const daysList = weekDays.map((d) => addDays(eachWeekStart[0], d));
   const CELL_HEIGHT = height / eachWeekStart.length;
@@ -93,6 +94,7 @@ const Month = () => {
     }
     const rows = [];
 
+    
     for (const startDay of eachWeekStart) {
       const cells = weekDays.map((d) => {
         const today = addDays(startDay, d);
@@ -133,14 +135,14 @@ const Month = () => {
                   {format(today, "dd")}
                 </Typography>
               </Avatar>
-              {/* <MonthEvents
+              <MonthEvents
                 events={recousedEvents}
                 today={today}
                 eachWeekStart={eachWeekStart}
                 daysList={daysList}
                 onViewMore={handleGotoDay}
                 cellHeight={CELL_HEIGHT}
-              /> */}
+              />
             </Fragment>
           </span>
         );
@@ -152,9 +154,9 @@ const Month = () => {
   };
 
   const renderTable = (resource) => {
+    console.log('resource', resource)
     return (
       <TableGrid days={daysList.length} indent="0">
-        {/* Header Days */}
         {daysList.map((date, i) => (
           <span key={i} className="rs__cell rs__header">
             <Typography align="center" variant="body2">

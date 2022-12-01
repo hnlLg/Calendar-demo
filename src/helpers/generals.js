@@ -46,3 +46,7 @@ import {
     const validity = arrytize ? value.length : value;
     return { value, validity };
   };
+
+  export const differenceInDaysOmitTime = (start, end) => {
+    return differenceInDays(endOfDay(end), startOfDay(start));
+  };
