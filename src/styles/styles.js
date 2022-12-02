@@ -3,6 +3,8 @@ import { alpha, styled } from "@mui/material";
 export const Wrapper = styled("div")(({ theme, dialog }) => ({
   position: "relative",
   overflow: "hidden",
+  padding: '80px 50px',
+  alignItems: 'center',
   "& .rs__table_loading": {
     background: dialog ? "" : alpha(theme.palette.background.paper, 0.4),
     position: "absolute",
@@ -29,7 +31,7 @@ export const Table = styled("div")(({ resource_count }) => ({
   display: "grid",
   gridTemplateColumns: `repeat(${resource_count}, 1fr)`,
   width: "100%",
-  overflowX: "auto",
+  overflowX: "hidden",
   overflowY: "hidden",
   boxSizing: "content-box",
 }));
