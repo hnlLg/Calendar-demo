@@ -1,4 +1,4 @@
-import { useEffect, useCallback, Fragment, useState } from "react";
+import {  Fragment, useState } from "react";
 import { Avatar, Typography, useTheme } from "@mui/material";
 import {
   addDays,
@@ -18,7 +18,6 @@ import Cell from "../components/common/Cell";
 import { TableGrid } from "../styles/styles";
 import useCalendarState from "../hooks/useCalendarState";
 import MonthEvents from "./events/MonthEvents";
-import { MONTH_NUMBER_HEIGHT, MULTI_DAY_EVENT_HEIGHT } from "../helpers/constant";
 
 
 const Month = () => {
@@ -27,11 +26,6 @@ const Month = () => {
     selectedDate,
     height,
     events,
-    handleGotoDay,
-    remoteEvents,
-    getRemoteEvents,
-    triggerLoading,
-    handleState,
     locale,
     hourFormat,
   } = useCalendarState();
@@ -51,43 +45,7 @@ const Month = () => {
   const theme = useTheme();
   const [extendHeight, setExtendHeight] = useState({})
 
-  const fetchEvents = useCallback(async () => {
-    try {
-      triggerLoading(true);
-      const start = eachWeekStart[0];
-      const end = addDays(eachWeekStart[eachWeekStart.length - 1], daysList.length);
-      const events = await (async () => {
-        // Remove `remoteEvents` in future release
-        if (remoteEvents) {
-          return await remoteEvents(`?start=${start}&end=${end}`);
-        } else {
-          return await getRemoteEvents({
-            start,
-            end,
-            view: "month",
-          });
-        }
-      })();
-      if (events && events?.length) {
-        handleState(events, "events");
-      }
-    } catch (error) {
-      throw error;
-    } finally {
-      triggerLoading(false);
-    }
-  }, [triggerLoading, eachWeekStart, daysList.length, remoteEvents, getRemoteEvents, handleState]);
-
-  useEffect(() => {
-    if ((remoteEvents || getRemoteEvents) instanceof Function) {
-      fetchEvents();
-    }
-    // eslint-disable-next-line
-  }, [fetchEvents]);
-
-  console.log(extendHeight)
-
-  const renderCells = (resource) => {
+  const renderCells = () => {
     let recousedEvents = events;
     const rows = [];
 
@@ -119,8 +77,6 @@ const Month = () => {
               end={end}
               day={selectedDate}
               height={CELL_HEIGHT}
-              //   resourceKey={field}
-              //   resourceVal={resource ? resource[field] : null}
               cellRenderer={cellRenderer}
             />
             <Fragment>
@@ -140,7 +96,6 @@ const Month = () => {
                   className="rs__hover__op"
                   onClick={(e) => {
                     e.stopPropagation();
-                    handleGotoDay(today);
                   }}
                 >
                   {format(today, "dd")}
