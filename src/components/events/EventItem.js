@@ -1,5 +1,5 @@
 import { Fragment, useMemo, useRef, useState } from "react";
-import {  Typography, ButtonBase, useTheme, Paper } from "@mui/material";
+import { Typography, ButtonBase, useTheme, Paper } from "@mui/material";
 // import ArrowRightRoundedIcon from "@mui/icons-material/ArrowRightRounded";
 // import ArrowLeftRoundedIcon from "@mui/icons-material/ArrowLeftRounded";
 // import EventNoteRoundedIcon from "@mui/icons-material/EventNoteRounded";
@@ -58,7 +58,7 @@ const EventItem = ({ event, multiday, hasPrev, hasNext, showdate }) => {
 
     return canDrag;
   }, [draggable, event.disabled, event.draggable]);
-  console.log('anchorEl',ref.current?.offsetWidth)
+
   return (
     <Fragment>
       <Paper
@@ -86,7 +86,7 @@ const EventItem = ({ event, multiday, hasPrev, hasNext, showdate }) => {
           }}
         >
           <div
-         ref={ref}
+            ref={ref}
             style={{
               height: "100%",
             }}
