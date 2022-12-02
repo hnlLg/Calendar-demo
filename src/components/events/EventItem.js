@@ -42,7 +42,7 @@ const EventItem = ({ event, hasPrev, hasNext }) => {
 
     return canDrag;
   }, [draggable, event.disabled, event.draggable]);
-  console.log('anchorEl',ref.current?.offsetWidth)
+
   return (
     <Fragment>
       <Paper
@@ -69,7 +69,7 @@ const EventItem = ({ event, hasPrev, hasNext }) => {
           }}
         >
           <div
-         ref={ref}
+            ref={ref}
             style={{
               height: "100%",
             }}

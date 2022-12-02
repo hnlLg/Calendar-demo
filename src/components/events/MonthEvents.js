@@ -25,7 +25,6 @@ const MonthEvents = ({
   prevNextEvents,
   // limitEvent
 }) => {
-  console.log(todayEvents)
   const LIMIT = Math.round((cellHeight - MONTH_NUMBER_HEIGHT) / MULTI_DAY_EVENT_HEIGHT - 1);
   const { translations } = useCalendarState()
   const eachFirstDayInCalcRow = eachWeekStart.some((date) => isSameDay(date, today)) ? today : null;
@@ -95,7 +94,7 @@ const MonthEvents = ({
             style={{ top: topSpace, fontSize: 11 }}
             onClick={(e) => {
               e.stopPropagation();
-              onViewMore((Math.abs(todayEvents.length - i)) * 19);
+              onViewMore(Math.abs(todayEvents.length - i));
             }}
           >
             {`${Math.abs(todayEvents.length - i)} ${translations.moreEvents}`}

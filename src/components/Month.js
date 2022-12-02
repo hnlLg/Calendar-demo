@@ -18,6 +18,7 @@ import Cell from "../components/common/Cell";
 import { TableGrid } from "../styles/styles";
 import useCalendarState from "../hooks/useCalendarState";
 import MonthEvents from "./events/MonthEvents";
+import { MONTH_NUMBER_HEIGHT, MULTI_DAY_EVENT_HEIGHT } from "../helpers/constant";
 
 
 const Month = () => {
@@ -84,6 +85,8 @@ const Month = () => {
     // eslint-disable-next-line
   }, [fetchEvents]);
 
+  console.log(extendHeight)
+
   const renderCells = (resource) => {
     let recousedEvents = events;
     const rows = [];
@@ -107,13 +110,15 @@ const Month = () => {
           )
           .sort((a, b) => b.end.getTime() - a.end.getTime());
 
+        console.log(todayEvents)
+
         return (
-          <span style={{ height: CELL_HEIGHT }} key={d.toString()} className="rs__cell">
+          <span style={{ height: CELL_HEIGHT + (extendHeight[startDay] || 0) }} key={d.toString()} className="rs__cell">
             <Cell
               start={start}
               end={end}
               day={selectedDate}
-              // height={CELL_HEIGHT}
+              height={CELL_HEIGHT}
               //   resourceKey={field}
               //   resourceVal={resource ? resource[field] : null}
               cellRenderer={cellRenderer}
@@ -147,9 +152,9 @@ const Month = () => {
                 today={today}
                 eachWeekStart={eachWeekStart}
                 daysList={daysList}
-                onViewMore={(today) => setExtendHeight({ ...extendHeight, [today]: todayEvents.length })}
+                onViewMore={(n) => setExtendHeight({ ...extendHeight, [startDay]: n * 28 })}
                 onViewLess={(x) => console.log(x)}
-                cellHeight={CELL_HEIGHT}
+                cellHeight={CELL_HEIGHT + (extendHeight[startDay] || 0)}
               />
             </Fragment>
           </span>
