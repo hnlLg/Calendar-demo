@@ -1,4 +1,4 @@
-import { useReducer } from "react";
+import { useEffect, useReducer } from "react";
 import { differenceInMinutes, addMinutes, isEqual } from "date-fns";
 import { arraytizeFieldVal } from "../helpers/generals";
 import CalendarContext, { defaultProps } from "./CalendarContext";

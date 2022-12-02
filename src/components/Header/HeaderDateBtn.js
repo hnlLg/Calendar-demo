@@ -7,24 +7,25 @@ import DateProvider from "../../hoc/DateProvider";
 import LocaleArrow from "../common/LocaleArrow";
 
 
-const HeaderDateBtn = ({ selectedDate, onChange }) => {
-  const { locale, navigationPickerProps } = useCalendarState()
+const HeaderDateBtn = ({ selectedDate }) => {
+  const { locale, navigationPickerProps, handleState } = useCalendarState()
   const [open, setOpen] = useState(false);
   const currentMonth = getMonth(selectedDate);
 
   const toggleDialog = () => setOpen(!open);
 
   const handleChange = (e) => {
-    onChange(e || new Date(), "selectedDate");
+    handleState(e || new Date(), "selectedDate");
   };
   const handlePrev = () => {
     const prevMonth = currentMonth - 1;
-    onChange(setMonth(selectedDate, prevMonth), "selectedDate");
+    handleState(setMonth(selectedDate, prevMonth), "selectedDate");
   };
   const handleNext = () => {
     const nextMonth = currentMonth + 1;
-    onChange(setMonth(selectedDate, nextMonth), "selectedDate");
+    handleState(setMonth(selectedDate, nextMonth), "selectedDate");
   };
+
   return (
     <>
       <LocaleArrow type="prev" onClick={handlePrev} />

@@ -1,4 +1,4 @@
-import { Fragment } from "react";
+import { Fragment, useState } from "react";
 import {
   closestTo,
   isBefore,
@@ -18,27 +18,36 @@ import useCalendarState from "../../hooks/useCalendarState";
 
 const MonthEvents = ({
   events,
+  todayEvents,
   today,
   eachWeekStart,
   daysList,
   onViewMore,
   cellHeight,
+  prevNextEvents,
+  // limitEvent
 }) => {
+  console.log(todayEvents)
   const LIMIT = Math.round((cellHeight - MONTH_NUMBER_HEIGHT) / MULTI_DAY_EVENT_HEIGHT - 1);
-  const { translations } =  useCalendarState()
+  const { translations } = useCalendarState()
   const eachFirstDayInCalcRow = eachWeekStart.some((date) => isSameDay(date, today)) ? today : null;
 
-  const todayEvents = events
-    .filter((e) =>
-      eachFirstDayInCalcRow &&
-      isWithinInterval(eachFirstDayInCalcRow, {
-        start: startOfDay(e.start),
-        end: endOfDay(e.end),
-      })
-        ? true
-        : isSameDay(e.start, today)
-    )
-    .sort((a, b) => b.end.getTime() - a.end.getTime());
+  // const todayEvents = events
+  //   .filter((e) =>
+  //     eachFirstDayInCalcRow &&
+  //       isWithinInterval(eachFirstDayInCalcRow, {
+  //         start: startOfDay(e.start),
+  //         end: endOfDay(e.end),
+  //       })
+  //       ? true
+  //       : isSameDay(e.start, today)
+  //   )
+  //   .sort((a, b) => b.end.getTime() - a.end.getTime());
+
+  // if (todayEvents.length) {
+  //   console.log(todayEvents, 'today')
+  // }
+
   return (
     <Fragment>
       {todayEvents.map((event, i) => {

@@ -1,5 +1,4 @@
 import { CircularProgress, Typography } from "@mui/material";
-// import { Month } from "./Month";
 import { Table, Wrapper } from "../styles/styles";
 import { Month } from "./Month";
 import Header from "./Header/Header";
@@ -17,7 +16,9 @@ const SchedulerComponent = () => {
       )}
       <Header />
       <div className="rs__outer_table" data-testid="grid">
-        <Table><Month /></Table>
+        <Table>
+          <Month />
+        </Table>
       </div>
     </Wrapper>
   );
