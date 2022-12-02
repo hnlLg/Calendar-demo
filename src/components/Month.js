@@ -1,4 +1,4 @@
-import { useEffect, useCallback, Fragment } from "react";
+import { useEffect, useCallback, Fragment, useState } from "react";
 import { Avatar, Typography, useTheme } from "@mui/material";
 import {
   addDays,
@@ -9,6 +9,14 @@ import {
   setHours,
   endOfMonth,
   startOfMonth,
+  closestTo,
+  startOfDay,
+  isBefore,
+  isAfter,
+  isSameDay,
+  endOfDay,
+  isWithinInterval,
+  startOfWeek,
 } from "date-fns";
 // import MonthEvents from "../components/events/MonthEvents";
 // import { WithResources } from "../components/common/WithResources";
@@ -47,6 +55,7 @@ const Month = () => {
   const daysList = weekDays.map((d) => addDays(eachWeekStart[0], d));
   const CELL_HEIGHT = height / eachWeekStart.length;
   const theme = useTheme();
+  const [extendHeight, setExtendHeight] = useState({})
 
   const fetchEvents = useCallback(async () => {
     try {
@@ -93,15 +102,29 @@ const Month = () => {
         const start = new Date(`${format(setHours(today, startHour), `yyyy/MM/dd ${hFormat}`)}`);
         const end = new Date(`${format(setHours(today, endHour), `yyyy/MM/dd ${hFormat}`)}`);
         // const field = resourceFields.idField;
+
+        const eachFirstDayInCalcRow = eachWeekStart.some((date) => isSameDay(date, today)) ? today : null;
+        const todayEvents = recousedEvents
+          .filter((e) =>
+            eachFirstDayInCalcRow &&
+              isWithinInterval(eachFirstDayInCalcRow, {
+                start: startOfDay(e.start),
+                end: endOfDay(e.end),
+              })
+              ? true
+              : isSameDay(e.start, today)
+          )
+          .sort((a, b) => b.end.getTime() - a.end.getTime());
+
         return (
           <span style={{ height: CELL_HEIGHT }} key={d.toString()} className="rs__cell">
             <Cell
               start={start}
               end={end}
               day={selectedDate}
-              height={CELL_HEIGHT}
-            //   resourceKey={field}
-            //   resourceVal={resource ? resource[field] : null}
+              // height={CELL_HEIGHT}
+              //   resourceKey={field}
+              //   resourceVal={resource ? resource[field] : null}
               cellRenderer={cellRenderer}
             />
             <Fragment>
@@ -129,17 +152,18 @@ const Month = () => {
               </Avatar>
               <MonthEvents
                 events={recousedEvents}
+                todayEvents={todayEvents}
                 today={today}
                 eachWeekStart={eachWeekStart}
                 daysList={daysList}
-                onViewMore={() => console.log('view more')}
+                onViewMore={(today) => setExtendHeight({ ...extendHeight, [today]: todayEvents.length })}
+                onViewLess={(x) => console.log(x)}
                 cellHeight={CELL_HEIGHT}
               />
             </Fragment>
           </span>
         );
       });
-
       rows.push(<Fragment key={startDay.toString()}>{cells}</Fragment>);
     }
     return rows;
@@ -163,7 +187,7 @@ const Month = () => {
   };
   return renderTable();
 
-//   return resources.length ? <WithResources renderChildren={renderTable} /> : renderTable();
+  //   return resources.length ? <WithResources renderChildren={renderTable} /> : renderTable();
 };
 
 export { Month };

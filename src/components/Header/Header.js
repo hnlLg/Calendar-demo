@@ -1,14 +1,7 @@
-import { Fragment, useState } from "react";
 import {
-  Button,
-  useTheme,
-  useMediaQuery,
-  Popover,
-  MenuList,
-  MenuItem,
-  IconButton,
+  Button, useMediaQuery, useTheme
 } from "@mui/material";
-import MoreVertIcon from "@mui/icons-material/MoreVert";
+import { useState } from "react";
 import useCalendarState from "../../hooks/useCalendarState";
 import HeaderDateBtn from "./HeaderDateBtn";
 
@@ -27,7 +20,7 @@ const Header = () => {
   };
 
 
-console.log('views',views)
+  console.log('views', views)
   return (
     <div
       style={{
@@ -36,7 +29,8 @@ console.log('views',views)
         alignItems: "center",
       }}
     >
-      <div data-testid="date-navigator">{navigation && <HeaderDateBtn selectedDate={selectedDate} onChange={handleState}  />}</div>
+      {/* <div data-testid="date-navigator">{navigation && <HeaderDateBtn selectedDate={selectedDate} onChange={handleState} />}</div> */}
+      <div data-testid="date-navigator">{navigation && <HeaderDateBtn selectedDate={selectedDate} />}</div>
       <div data-testid="view-navigator">
         <Button onClick={() => handleState(new Date(), "selectedDate")}>
           {translations.navigation.today}
