@@ -146,7 +146,6 @@ const Month = () => {
   };
 
   const renderTable = (resource) => {
-    console.log('resource', resource)
     return (
       <TableGrid days={daysList.length} indent="0">
         {daysList.map((date, i) => (

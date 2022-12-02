@@ -140,7 +140,8 @@ const CalendarProvider = ({ initial, children }) => {
         ...state,
         handleState,
         getViews,
-        onDrop
+        onDrop,
+        dispatch
       }}
     >
       {children}

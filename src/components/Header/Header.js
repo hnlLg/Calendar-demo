@@ -26,8 +26,6 @@ const Header = () => {
     setAnchorEl(el || null);
   };
 
-
-console.log('views',views)
   return (
     <div
       style={{

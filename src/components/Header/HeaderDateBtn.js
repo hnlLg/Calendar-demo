@@ -15,7 +15,6 @@ const HeaderDateBtn = ({ selectedDate, onChange }) => {
   const toggleDialog = () => setOpen(!open);
 
   const handleChange = (e) => {
-    console.log(e);
     onChange(e || new Date(), "selectedDate");
   };
   const handlePrev = () => {

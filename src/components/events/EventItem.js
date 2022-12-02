@@ -67,7 +67,7 @@ const EventItem = ({ event, multiday, hasPrev, hasNext, showdate }) => {
 
     return canDrag;
   }, [draggable, event.disabled, event.draggable]);
-
+  console.log('event', event)
   return (
     <Fragment>
       <Paper
@@ -98,7 +98,7 @@ const EventItem = ({ event, multiday, hasPrev, hasNext, showdate }) => {
             style={{
               height: "100%",
             }}
-            draggable={true}
+            draggable={isDraggable}
             onDragStart={(e) => {
               e.stopPropagation();
               e.dataTransfer.setData("text/plain", `${event.event_id}`);
