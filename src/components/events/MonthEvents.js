@@ -23,28 +23,10 @@ const MonthEvents = ({
   onViewMore,
   cellHeight,
   prevNextEvents,
-  // limitEvent
 }) => {
   const LIMIT = Math.round((cellHeight - MONTH_NUMBER_HEIGHT) / MULTI_DAY_EVENT_HEIGHT - 1);
   const { translations } = useCalendarState()
   const eachFirstDayInCalcRow = eachWeekStart.some((date) => isSameDay(date, today)) ? today : null;
-
-  // const todayEvents = events
-  //   .filter((e) =>
-  //     eachFirstDayInCalcRow &&
-  //       isWithinInterval(eachFirstDayInCalcRow, {
-  //         start: startOfDay(e.start),
-  //         end: endOfDay(e.end),
-  //       })
-  //       ? true
-  //       : isSameDay(e.start, today)
-  //   )
-  //   .sort((a, b) => b.end.getTime() - a.end.getTime());
-
-  // if (todayEvents.length) {
-  //   console.log(todayEvents, 'today')
-  // }
-
   return (
     <Fragment>
       {todayEvents.map((event, i) => {
@@ -55,7 +37,6 @@ const MonthEvents = ({
         let eventLength = differenceInDaysOmitTime(start, event.end) + 1;
         const toNextWeek = eventLength >= daysList.length;
         if (toNextWeek) {
-          // Rethink it
           const NotAccurateWeekStart = startOfWeek(event.start);
           const closestStart = closestTo(NotAccurateWeekStart, eachWeekStart);
           if (closestStart) {
@@ -75,7 +56,7 @@ const MonthEvents = ({
           );
         });
         let index = i;
-
+        console.log('prevNextEvents',prevNextEvents)
         if (prevNextEvents.length) {
           index += prevNextEvents.length;
           // if (index > LIMIT) {

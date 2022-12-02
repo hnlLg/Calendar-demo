@@ -107,7 +107,7 @@ const Month = () => {
                 today={today}
                 eachWeekStart={eachWeekStart}
                 daysList={daysList}
-                onViewMore={(n) => setExtendHeight({ ...extendHeight, [startDay]: n * 28 })}
+                onViewMore={(n) => setExtendHeight({ ...extendHeight, [startDay]: (extendHeight[startDay] || 0) +  n * 28 })}
                 onViewLess={(x) => console.log(x)}
                 cellHeight={CELL_HEIGHT + (extendHeight[startDay] || 0)}
               />
