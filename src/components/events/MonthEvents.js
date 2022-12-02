@@ -56,7 +56,6 @@ const MonthEvents = ({
           );
         });
         let index = i;
-        console.log('prevNextEvents',prevNextEvents)
         if (prevNextEvents.length) {
           index += prevNextEvents.length;
           // if (index > LIMIT) {
@@ -64,7 +63,6 @@ const MonthEvents = ({
           // }
         }
         const topSpace = index * MULTI_DAY_EVENT_HEIGHT + MONTH_NUMBER_HEIGHT;
-
         return index > LIMIT ? (
           ""
         ) : index === LIMIT ? (

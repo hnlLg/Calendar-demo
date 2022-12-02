@@ -83,7 +83,6 @@ const EventItem = ({ event, hasPrev, hasNext }) => {
               e.currentTarget.style.backgroundColor = event.color || theme.palette.primary.main;
             }}
             onDragOver={(e) => {
-              e.currentTarget.style.width = `${200}px`
               e.stopPropagation();
               e.preventDefault();
             }}

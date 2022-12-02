@@ -75,7 +75,7 @@ export const EVENTS= [
   },
   {
     event_id: 8,
-    title: "Event 6",
+    title: "Event 8",
     start: new Date(
       new Date(new Date(new Date().setHours(10)).setMinutes(30)).setDate(new Date().getDate() - 3)
     ),
@@ -85,9 +85,29 @@ export const EVENTS= [
   },
   {
     event_id: 9,
-    title: "Event 6",
+    title: "Event 9",
     start: new Date(
       new Date(new Date(new Date().setHours(10)).setMinutes(30)).setDate(new Date().getDate() - 2)
+    ),
+    end: new Date(new Date(new Date().setHours(14)).setMinutes(0)),
+    admin_id: 2,
+    allDay: true,
+  },
+  {
+    event_id: 10,
+    title: "Event 10",
+    start: new Date(
+      new Date(new Date(new Date().setHours(10)).setMinutes(30)).setDate(new Date().getDate() - 9)
+    ),
+    end: new Date(new Date(new Date().setHours(14)).setMinutes(0)),
+    admin_id: 2,
+    allDay: true,
+  },
+  {
+    event_id: 11,
+    title: "Event 11",
+    start: new Date(
+      new Date(new Date(new Date().setHours(10)).setMinutes(30)).setDate(new Date().getDate() - 3)
     ),
     end: new Date(new Date(new Date().setHours(14)).setMinutes(0)),
     admin_id: 2,

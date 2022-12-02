@@ -46,7 +46,6 @@ const Month = () => {
   const [extendHeight, setExtendHeight] = useState({})
 
   const renderCells = () => {
-    let recousedEvents = events;
     const rows = [];
 
     for (const startDay of eachWeekStart) {
@@ -56,7 +55,7 @@ const Month = () => {
         const end = new Date(`${format(setHours(today, endHour), `yyyy/MM/dd ${hFormat}`)}`);
 
         const eachFirstDayInCalcRow = eachWeekStart.some((date) => isSameDay(date, today)) ? today : null;
-        const todayEvents = recousedEvents
+        const todayEvents = events
           .filter((e) =>
             eachFirstDayInCalcRow &&
               isWithinInterval(eachFirstDayInCalcRow, {
@@ -67,9 +66,6 @@ const Month = () => {
               : isSameDay(e.start, today)
           )
           .sort((a, b) => b.end.getTime() - a.end.getTime());
-
-        console.log(todayEvents)
-
         return (
           <span style={{ height: CELL_HEIGHT + (extendHeight[startDay] || 0) }} key={d.toString()} className="rs__cell">
             <Cell
@@ -102,7 +98,7 @@ const Month = () => {
                 </Typography>
               </Avatar>
               <MonthEvents
-                events={recousedEvents}
+                events={events}
                 todayEvents={todayEvents}
                 today={today}
                 eachWeekStart={eachWeekStart}
