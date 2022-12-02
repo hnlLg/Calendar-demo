@@ -1,4 +1,4 @@
-import { Fragment, useMemo, useState } from "react";
+import { Fragment, useMemo, useRef, useState } from "react";
 import { Popover, Typography, ButtonBase, useTheme, IconButton, Paper } from "@mui/material";
 import { format } from "date-fns";
 // import ArrowRightRoundedIcon from "@mui/icons-material/ArrowRightRounded";
@@ -19,6 +19,7 @@ const EventItem = ({ event, multiday, hasPrev, hasNext, showdate }) => {
   const [anchorEl, setAnchorEl] = useState(null);
   const [deleteConfirm, setDeleteConfirm] = useState(false);
   const theme = useTheme();
+  const ref = useRef()
 
 
   const triggerViewer = (el) => {
@@ -58,6 +59,7 @@ const EventItem = ({ event, multiday, hasPrev, hasNext, showdate }) => {
 
     return canDrag;
   }, [draggable, event.disabled, event.draggable]);
+  console.log('anchorEl',ref.current?.offsetWidth)
   return (
     <Fragment>
       <Paper
@@ -75,7 +77,7 @@ const EventItem = ({ event, multiday, hasPrev, hasNext, showdate }) => {
           onClick={(e) => {
             e.preventDefault();
             e.stopPropagation();
-            triggerViewer(e.currentTarget);
+            // triggerViewer(e.currentTarget);
           }}
           disabled={event.disabled}
           style={{
@@ -85,6 +87,7 @@ const EventItem = ({ event, multiday, hasPrev, hasNext, showdate }) => {
           }}
         >
           <div
+         ref={ref}
             style={{
               height: "100%",
             }}
@@ -93,6 +96,7 @@ const EventItem = ({ event, multiday, hasPrev, hasNext, showdate }) => {
               e.stopPropagation();
               e.dataTransfer.setData("text/plain", `${event.event_id}`);
               e.currentTarget.style.backgroundColor = theme.palette.error.main;
+              e.currentTarget.style.width = `${200}px`
             }}
             onDragEnd={(e) => {
               e.currentTarget.style.backgroundColor = event.color || theme.palette.primary.main;

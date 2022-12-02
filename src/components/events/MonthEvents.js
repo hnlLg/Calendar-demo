@@ -39,7 +39,6 @@ const MonthEvents = ({
         : isSameDay(e.start, today)
     )
     .sort((a, b) => b.end.getTime() - a.end.getTime());
-
   return (
     <Fragment>
       {todayEvents.map((event, i) => {
@@ -89,7 +88,7 @@ const MonthEvents = ({
             style={{ top: topSpace, fontSize: 11 }}
             onClick={(e) => {
               e.stopPropagation();
-              onViewMore(event.start);
+              onViewMore((Math.abs(todayEvents.length - i)) * 19);
             }}
           >
             {`${Math.abs(todayEvents.length - i)} ${translations.moreEvents}`}
