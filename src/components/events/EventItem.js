@@ -67,7 +67,6 @@ const EventItem = ({ event, multiday, hasPrev, hasNext, showdate }) => {
 
     return canDrag;
   }, [draggable, event.disabled, event.draggable]);
-  console.log('event', event)
   return (
     <Fragment>
       <Paper

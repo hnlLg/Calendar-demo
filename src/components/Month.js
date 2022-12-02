@@ -29,7 +29,6 @@ const Month = () => {
     getRemoteEvents,
     triggerLoading,
     handleState,
-    resourceFields,
     locale,
     hourFormat,
   } = useCalendarState();
