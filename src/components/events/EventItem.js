@@ -7,27 +7,18 @@ import { Fragment, useMemo, useState } from "react";
 // import SupervisorAccountRoundedIcon from "@mui/icons-material/SupervisorAccountRounded";
 // import { PopperInner } from "../../styles/styles";
 // import EventActions from "./Actions";
-import { differenceInDaysOmitTime } from "../../helpers/generals";
 import useCalendarState from "../../hooks/useCalendarState";
 
 
 const EventItem = ({ event, multiday, hasPrev, hasNext, showdate }) => {
   const {
-    direction,
-    locale,
-    hourFormat,
     eventRenderer,
-    view,
     draggable,
   } = useCalendarState()
   const [anchorEl, setAnchorEl] = useState(null);
   const [deleteConfirm, setDeleteConfirm] = useState(false);
   const theme = useTheme();
-  const hFormat = hourFormat === "12" ? "hh:mm a" : "HH:mm";
 
-  //   const NextArrow = direction === "rtl" ? ArrowLeftRoundedIcon : ArrowRightRoundedIcon;
-  //   const PrevArrow = direction === "rtl" ? ArrowRightRoundedIcon : ArrowLeftRoundedIcon;
-  const hideDates = differenceInDaysOmitTime(event.start, event.end) <= 0 && event.allDay;
 
   const triggerViewer = (el) => {
     if (!el && deleteConfirm) {
@@ -66,7 +57,6 @@ const EventItem = ({ event, multiday, hasPrev, hasNext, showdate }) => {
 
     return canDrag;
   }, [draggable, event.disabled, event.draggable]);
-
   return (
     <Fragment>
       <Paper
@@ -97,7 +87,7 @@ const EventItem = ({ event, multiday, hasPrev, hasNext, showdate }) => {
             style={{
               height: "100%",
             }}
-            draggable={true}
+            draggable={isDraggable}
             onDragStart={(e) => {
               e.stopPropagation();
               e.dataTransfer.setData("text/plain", `${event.event_id}`);
