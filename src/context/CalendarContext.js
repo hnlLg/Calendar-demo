@@ -14,18 +14,8 @@ export const defaultProps = {
   navigation: true,
   selectedDate: new Date(),
   events: [],
-  remoteEvents: undefined,
-  fields: [],
   loading: undefined,
-  customEditor: undefined,
-  onConfirm: undefined,
-  onDelete: undefined,
-  viewerExtraComponent: undefined,
-  resourceViewMode: "default",
-  direction: "ltr",
-  dialogMaxWidth: "md",
   locale: enUS,
-  deletable: true,
   editable: true,
   translations: {
     navigation: {
@@ -59,9 +49,6 @@ const CalendarContext = React.createContext({
   selectedResource: undefined,
   handleState: () => { },
   getViews: () => [],
-  triggerDialog: () => { },
-  triggerLoading: () => { },
-  handleGotoDay: () => { },
   confirmEvent: () => { },
   onDrop: () => { },
 });

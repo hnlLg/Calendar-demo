@@ -9,17 +9,11 @@ import {
   setHours,
   endOfMonth,
   startOfMonth,
-  closestTo,
   startOfDay,
-  isBefore,
-  isAfter,
   isSameDay,
   endOfDay,
   isWithinInterval,
-  startOfWeek,
 } from "date-fns";
-// import MonthEvents from "../components/events/MonthEvents";
-// import { WithResources } from "../components/common/WithResources";
 import Cell from "../components/common/Cell";
 import { TableGrid } from "../styles/styles";
 import useCalendarState from "../hooks/useCalendarState";
@@ -81,8 +75,7 @@ const Month = () => {
     } finally {
       triggerLoading(false);
     }
-    // eslint-disable-next-line
-  }, [selectedDate, remoteEvents, getRemoteEvents]);
+  }, [triggerLoading, eachWeekStart, daysList.length, remoteEvents, getRemoteEvents, handleState]);
 
   useEffect(() => {
     if ((remoteEvents || getRemoteEvents) instanceof Function) {
@@ -100,7 +93,6 @@ const Month = () => {
         const today = addDays(startDay, d);
         const start = new Date(`${format(setHours(today, startHour), `yyyy/MM/dd ${hFormat}`)}`);
         const end = new Date(`${format(setHours(today, endHour), `yyyy/MM/dd ${hFormat}`)}`);
-        // const field = resourceFields.idField;
 
         const eachFirstDayInCalcRow = eachWeekStart.some((date) => isSameDay(date, today)) ? today : null;
         const todayEvents = recousedEvents

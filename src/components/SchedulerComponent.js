@@ -5,7 +5,7 @@ import Header from "./Header/Header";
 
 const SchedulerComponent = () => {
   return (
-    <Wrapper data-testid="rs-wrapper">
+    <Wrapper >
       {false && (
         <div className="rs__table_loading">
           <span>
@@ -15,7 +15,7 @@ const SchedulerComponent = () => {
         </div>
       )}
       <Header />
-      <div className="rs__outer_table" data-testid="grid">
+      <div className="rs__outer_table" >
         <Table>
           <Month />
         </Table>

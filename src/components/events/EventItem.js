@@ -1,32 +1,16 @@
-import { Fragment, useMemo, useRef, useState } from "react";
+import { Fragment, useMemo, useRef } from "react";
 import {  Typography, ButtonBase, useTheme, Paper } from "@mui/material";
-// import ArrowRightRoundedIcon from "@mui/icons-material/ArrowRightRounded";
-// import ArrowLeftRoundedIcon from "@mui/icons-material/ArrowLeftRounded";
-// import EventNoteRoundedIcon from "@mui/icons-material/EventNoteRounded";
-// import ClearRoundedIcon from "@mui/icons-material/ClearRounded";
-// import SupervisorAccountRoundedIcon from "@mui/icons-material/SupervisorAccountRounded";
-// import { PopperInner } from "../../styles/styles";
-// import EventActions from "./Actions";
 import useCalendarState from "../../hooks/useCalendarState";
 
 
-const EventItem = ({ event, multiday, hasPrev, hasNext, showdate }) => {
+const EventItem = ({ event, hasPrev, hasNext }) => {
   const {
     eventRenderer,
     draggable,
   } = useCalendarState()
-  const [anchorEl, setAnchorEl] = useState(null);
-  const [deleteConfirm, setDeleteConfirm] = useState(false);
   const theme = useTheme();
   const ref = useRef()
 
-
-  const triggerViewer = (el) => {
-    if (!el && deleteConfirm) {
-      setDeleteConfirm(false);
-    }
-    setAnchorEl(el || null);
-  };
 
 
 
@@ -76,7 +60,6 @@ const EventItem = ({ event, multiday, hasPrev, hasNext, showdate }) => {
           onClick={(e) => {
             e.preventDefault();
             e.stopPropagation();
-            // triggerViewer(e.currentTarget);
           }}
           disabled={event.disabled}
           style={{
@@ -95,12 +78,12 @@ const EventItem = ({ event, multiday, hasPrev, hasNext, showdate }) => {
               e.stopPropagation();
               e.dataTransfer.setData("text/plain", `${event.event_id}`);
               e.currentTarget.style.backgroundColor = theme.palette.error.main;
-              e.currentTarget.style.width = `${200}px`
             }}
             onDragEnd={(e) => {
               e.currentTarget.style.backgroundColor = event.color || theme.palette.primary.main;
             }}
             onDragOver={(e) => {
+              e.currentTarget.style.width = `${200}px`
               e.stopPropagation();
               e.preventDefault();
             }}

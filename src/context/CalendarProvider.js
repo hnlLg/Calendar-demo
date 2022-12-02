@@ -1,7 +1,6 @@
-import { useEffect, useReducer } from "react";
-import { differenceInMinutes, addMinutes, isEqual } from "date-fns";
-import { arraytizeFieldVal } from "../helpers/generals";
-import CalendarContext, { defaultProps } from "./CalendarContext";
+import {  useReducer } from "react";
+import { differenceInMinutes, addMinutes } from "date-fns";
+import CalendarContext from "./CalendarContext";
 import { ACTION_TYPE, TYPE } from '../constants'
 
 const initialValues = (initial) => {
@@ -12,12 +11,11 @@ const initialValues = (initial) => {
     dialog: false,
     mounted: false,
     selectedRange: undefined,
-    fields: [...defaultProps.fields, ...(initial.fields || [])],
   };
 };
 
 const CalendarProvider = ({ initial, children }) => {
-  const { onEventDrop, loading } = initial
+  const { onEventDrop } = initial
 
   const [state, dispatch] = useReducer((state, action) => {
     switch (action.type) {
@@ -38,14 +36,12 @@ const CalendarProvider = ({ initial, children }) => {
     }
   }, initialValues(initial));
 
-  // Get Calendar view
   const getViews = () => ['month']
 
   const handleState = (value, name) => {
     dispatch({ type: ACTION_TYPE.SET, payload: { name, value } });
   };
 
-  // Handle add or update an event
   const confirmEvent = (event, action) => {
     let eventList;
     if (action === ACTION_TYPE.EDIT) {
@@ -57,13 +53,6 @@ const CalendarProvider = ({ initial, children }) => {
     }
     handleState(eventList, "events");
   };
-
-  // const triggerLoading = (status) => {
-  //   // Trigger if not out-sourced by props
-  //   if (typeof loading === TYPE.UNDEFINED) {
-  //     dispatch({ type: ACTION_TYPE.TRIGGER_LOADING, payload: status });
-  //   }
-  // };
 
   const onDrop = async (
     eventId,
