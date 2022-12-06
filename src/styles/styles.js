@@ -3,8 +3,12 @@ import { alpha, styled } from "@mui/material";
 export const Wrapper = styled("div")(({ theme, dialog }) => ({
   position: "relative",
   overflow: "hidden",
-  padding: '80px 50px',
+  margin: '18px',
   alignItems: 'center',
+  width: 'calc(100% - 36px)',
+  background: 'white',
+  boxShadow: '0px 2px 10px #EDF1FB',
+  borderRadius: 10,
   "& .rs__table_loading": {
     background: dialog ? "" : alpha(theme.palette.background.paper, 0.4),
     position: "absolute",
