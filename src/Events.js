@@ -1,11 +1,12 @@
 
-export const EVENTS= [
+export const EVENTS = [
   {
     event_id: 1,
     title: "Event 1 (Disabled)",
     start: new Date(new Date(new Date().setHours(9)).setMinutes(0)),
     end: new Date(new Date(new Date().setHours(10)).setMinutes(0)),
     disabled: true,
+    status: 'ONGOING',
     admin_id: [1, 2, 3, 4],
   },
   {
@@ -14,6 +15,7 @@ export const EVENTS= [
     start: new Date(new Date(new Date().setHours(10)).setMinutes(0)),
     end: new Date(new Date(new Date().setHours(12)).setMinutes(0)),
     admin_id: 2,
+    status: 'ONGOING',
     color: "#50b500",
   },
   {
@@ -24,6 +26,7 @@ export const EVENTS= [
     admin_id: 1,
     editable: false,
     deletable: false,
+    status: 'ONGOING',
   },
   {
     event_id: 4,
@@ -37,6 +40,7 @@ export const EVENTS= [
     admin_id: 2,
     color: "#900000",
     allDay: true,
+    status: 'ONGOING',
   },
   {
     event_id: 5,
@@ -49,6 +53,7 @@ export const EVENTS= [
     ),
     admin_id: 2,
     editable: true,
+    status: 'ONGOING',
   },
   {
     event_id: 6,
@@ -59,6 +64,7 @@ export const EVENTS= [
     end: new Date(new Date(new Date().setHours(14)).setMinutes(0)),
     admin_id: 2,
     allDay: true,
+    status: 'ONGOING',
   },
   {
     event_id: 7,
@@ -72,6 +78,7 @@ export const EVENTS= [
     admin_id: 1,
     draggable: false,
     color: "#8000cc",
+    status: 'ONGOING',
   },
   {
     event_id: 8,
@@ -82,6 +89,7 @@ export const EVENTS= [
     end: new Date(new Date(new Date().setHours(14)).setMinutes(0)),
     admin_id: 2,
     allDay: true,
+    status: 'ONGOING',
   },
   {
     event_id: 9,
@@ -92,6 +100,7 @@ export const EVENTS= [
     end: new Date(new Date(new Date().setHours(14)).setMinutes(0)),
     admin_id: 2,
     allDay: true,
+    status: 'ONGOING',
   },
   {
     event_id: 10,
@@ -102,6 +111,7 @@ export const EVENTS= [
     end: new Date(new Date(new Date().setHours(14)).setMinutes(0)),
     admin_id: 2,
     allDay: true,
+    status: 'ONGOING',
   },
   {
     event_id: 11,
@@ -112,5 +122,6 @@ export const EVENTS= [
     end: new Date(new Date(new Date().setHours(14)).setMinutes(0)),
     admin_id: 2,
     allDay: true,
+    status: 'ONGOING',
   },
 ];

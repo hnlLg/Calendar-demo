@@ -9,7 +9,7 @@ import {
 } from "date-fns";
 import { Typography } from "@mui/material";
 import EventItem from "./EventItem";
-import { MONTH_NUMBER_HEIGHT, MULTI_DAY_EVENT_HEIGHT } from "../../helpers/constant";
+import { MONTH_NUMBER_HEIGHT, MULTI_DAY_EVENT_HEIGHT, MULTI_DAY_GAP } from "../../helpers/constant";
 import { differenceInDaysOmitTime } from "../../helpers/generals";
 import useCalendarState from "../../hooks/useCalendarState";
 
@@ -62,7 +62,7 @@ const MonthEvents = ({
           //   index = LIMIT;
           // }
         }
-        const topSpace = index * MULTI_DAY_EVENT_HEIGHT + MONTH_NUMBER_HEIGHT;
+        const topSpace = index * (MULTI_DAY_EVENT_HEIGHT + MULTI_DAY_GAP) + MONTH_NUMBER_HEIGHT;
         return index > LIMIT ? (
           ""
         ) : index === LIMIT ? (
@@ -85,6 +85,7 @@ const MonthEvents = ({
             style={{
               top: topSpace,
               width: `${100 * eventLength}%`,
+              height: MULTI_DAY_EVENT_HEIGHT
             }}
           >
             <EventItem

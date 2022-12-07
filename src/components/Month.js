@@ -1,4 +1,4 @@
-import {  Fragment, useState } from "react";
+import { Fragment, useState } from "react";
 import { Avatar, Typography, useTheme } from "@mui/material";
 import {
   addDays,
@@ -67,7 +67,15 @@ const Month = () => {
           )
           .sort((a, b) => b.end.getTime() - a.end.getTime());
         return (
-          <span style={{ height: CELL_HEIGHT + (extendHeight[startDay] || 0) }} key={d.toString()} className="rs__cell">
+          <span
+            style={{
+              height: CELL_HEIGHT + (extendHeight[startDay] || 0),
+              backgroundColor: isToday(today) ? '#2933C514' : "transparent",
+              borderTop: isToday(today) && '3px solid #2933C5'
+            }}
+            className="rs__cell"
+            key={d.toString()}
+          >
             <Cell
               start={start}
               end={end}
@@ -78,23 +86,23 @@ const Month = () => {
             <Fragment>
               <Avatar
                 style={{
-                  width: 27,
-                  height: 27,
+                  height: 17,
+                  width: 'auto',
                   position: "absolute",
-                  top: 0,
-                  background: isToday(today) ? theme.palette.secondary.main : "transparent",
-                  color: isToday(today) ? theme.palette.secondary.contrastText : "",
-                  marginBottom: 2,
+                  top: 6.5,
+                  left: 5.5,
+                  background: "transparent",
                 }}
               >
                 <Typography
-                  color={!isSameMonth(today, monthStart) ? "#ccc" : "textPrimary"}
+                  // color={!isSameMonth(today, monthStart) ? "#ccc" : "textPrimary"}
+                  color={isToday(today) && "#2933C5 !important"}
                   className="rs__hover__op"
                   onClick={(e) => {
                     e.stopPropagation();
                   }}
                 >
-                  {format(today, "dd")}
+                  {format(today, "d")}
                 </Typography>
               </Avatar>
               <MonthEvents
@@ -103,7 +111,7 @@ const Month = () => {
                 today={today}
                 eachWeekStart={eachWeekStart}
                 daysList={daysList}
-                onViewMore={(n) => setExtendHeight({ ...extendHeight, [startDay]: (extendHeight[startDay] || 0) +  n * 28 })}
+                onViewMore={(n) => setExtendHeight({ ...extendHeight, [startDay]: (extendHeight[startDay] || 0) + n * 28 })}
                 onViewLess={(x) => console.log(x)}
                 cellHeight={CELL_HEIGHT + (extendHeight[startDay] || 0)}
               />

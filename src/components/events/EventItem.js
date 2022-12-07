@@ -1,9 +1,37 @@
 import { Fragment, useMemo, useRef } from "react";
-import {  Typography, ButtonBase, useTheme, Paper } from "@mui/material";
+import { ButtonBase, useTheme, Paper } from "@mui/material";
 import useCalendarState from "../../hooks/useCalendarState";
+import Avatar from '@mui/material/Avatar'
+import AvatarGroup from '@mui/material/AvatarGroup'
+import { withStyles } from "@mui/styles";
+import {
+  differenceInDays
+} from "date-fns";
+import clsx from 'clsx'
+// import { COLORS, TYPE } from '../../helpers/constant'
 
+const style = {
+  eventContainer: {
+    display: 'flex',
+    alignItems: 'center',
+    height: '100%',
+    '@media screen and (min-width: 1800px)': {
+      maxWidth: 300
+    }
+  },
+  avatarGroup: {
+    marginLeft: 5,
+    marginRight: 5
+  },
+  eventTitle: {
+    textAlign: 'left',
+    lineHeight: 1,
+    fontSize: 14,
+    fontWeight: 400
+  }
+}
 
-const EventItem = ({ event, hasPrev, hasNext }) => {
+const EventItem = ({ classes, event, hasPrev, hasNext, multiday }) => {
   const {
     eventRenderer,
     draggable,
@@ -11,8 +39,9 @@ const EventItem = ({ event, hasPrev, hasNext }) => {
   const theme = useTheme();
   const ref = useRef()
 
-
-
+  const mapTypeToColor = () => {
+    // return COLORS[type][data.color]
+  }
 
   const renderEvent = useMemo(() => {
     if (typeof eventRenderer === "function") {
@@ -22,12 +51,32 @@ const EventItem = ({ event, hasPrev, hasNext }) => {
       }
     }
 
+    const diffDays = differenceInDays(event.end, event.start)
+
     let item = (
-      <div style={{ padding: 2 }}>
-        <Typography variant="subtitle2" style={{ fontSize: 12, textAlign: 'left' }} noWrap>
-          {event.title}
-        </Typography>
-      </div>
+      // <div style={{ display: 'flex', alignItems: 'center', height: '100%' }}>
+      <div className={clsx(classes.eventContainer, { [classes.timeRangeEvent]: diffDays })} >
+        {/* {!hasPrev &&
+          (
+            <> */}
+        <AvatarGroup
+          max={1}
+          spacing={10}
+          className={classes.avatarGroup}
+          componentsProps={{ additionalAvatar: { style: { width: 16, height: 16 } } }}
+        >
+          {/* {data.products.map((product, index) => ( */}
+          <Avatar sx={{ width: 16, height: 16 }} alt="Remy Sharp" src='https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/112.png' />
+          <Avatar sx={{ width: 16, height: 16 }} alt="Remy Sharp" src='https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/112.png' />
+          <Avatar sx={{ width: 16, height: 16 }} alt="Remy Sharp" src='https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/112.png' />
+          {/* ))} */}
+        </AvatarGroup>
+        <div className={classes.eventTitle} noWrap>
+          {new Date(event.start).getUTCDate().toString()} {hasPrev.toString()}
+        </div>
+        {/* </>
+          )} */}
+      </div >
     );
     return item;
   }, [eventRenderer, event]);
@@ -104,4 +153,4 @@ EventItem.defaultProps = {
   showdate: true,
 };
 
-export default EventItem;
+export default withStyles(style)(EventItem);

@@ -1,4 +1,5 @@
 import { alpha, styled } from "@mui/material";
+import { FONT_COLOR } from "../helpers/constant";
 
 export const Wrapper = styled("div")(({ theme, dialog }) => ({
   position: "relative",
@@ -96,6 +97,9 @@ export const TableGrid = styled("div")(
       },
       "& .rs__hover__op": {
         cursor: "pointer",
+        fontSize: 14,
+        fontWeight: 600,
+        color: FONT_COLOR.palette.black,
         "&:hover": {
           opacity: 0.7,
           textDecoration: "underline",
